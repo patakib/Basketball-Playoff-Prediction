@@ -22,11 +22,29 @@ class Data:
     """Form and reshape the rawdata to fit our purposes"""
     
     def __init__(self):
-        """Initialize the dataframe"""
+        
         self.df = pd.read_csv('nbaallelo.csv')
         self.df['TeamYear'] = self.df['year_id'].astype(str) + '-' + self.df['team_id']
+        self.df_playoff = self.df[self.df['is_playoffs']==1]
+        
+        self.playoffteams = self.df_playoff['TeamYear'].unique().tolist()
+        self.allteams = self.df['TeamYear'].unique().tolist()
+        self.labels = list()
+        
+        for team in self.allteams:
+            if team in self.playoffteams:
+                self.labels.append(1)
+            else:
+                self.labels.append(0)
+        
+        self.teamlabels = pd.DataFrame(
+            {'TeamYear': self.allteams,
+             'Playoff': self.labels
+             })
 
     def overview(self, rows):
         return self.df.head(rows)
-        
+    
+    def playoffdata(self,rows):
+        return self.teamlabels.head(rows)
         
