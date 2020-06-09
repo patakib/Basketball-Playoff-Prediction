@@ -41,10 +41,30 @@ class Data:
             {'TeamYear': self.allteams,
              'Playoff': self.labels
              })
+        
+        # self.trh = self.df[(self.df['TeamYear']=='1947-TRH') & (self.df['is_playoffs']==0)]
+        # self.trh = self.trh[['game_result']]
+        # self.trh = self.trh.head(20)
+        # self.trh = self.trh.rename(columns={'game_result':'1947-TRH'})
+        # self.trh = self.trh.T
+        
+        for team in self.allteams:
+            self.teamrecord = self.df[(self.df['TeamYear']==team) & (self.df['is_playoffs']==0)]
+            self.teamrecord = self.teamrecord[['game_result']]
+            self.teamrecord = self.teamrecord.head(20)
+            self.teamrecord = self.teamrecord.rename(columns={'game_result': team})
+            self.teamrecord = self.teamrecord.T
+            self.database = pd.concat([self.teamlabels, self.teamrecord], axis=1, sort=False)
+            lst = [self.teamrecord]
+            del lst
+            
+        
 
     def overview(self, rows):
         return self.df.head(rows)
     
     def playoffdata(self,rows):
         return self.teamlabels.head(rows)
+    
+    
         
