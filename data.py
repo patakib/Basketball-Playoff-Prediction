@@ -6,6 +6,7 @@ Created on Sun Jun  7 18:40:45 2020
 """
 
 import pandas as pd
+import numpy as np
 
 class RawData:
     """loading the dataset into pandas dataframe"""
@@ -42,19 +43,31 @@ class Data:
              'Playoff': self.labels
              })
         
+        self.datacolumns = ["M1","M2","M3","M4","M5","M6","M7","M8","M9","M10"]
+        # ,"M11","M12","M13","M14","M15","M16","M17","M18","M19","M20"
+        for column in self.datacolumns:
+            self.teamlabels[column] = np.nan
+        
+        
+        # self.teamlabels = self.teamlabels.set_index('TeamYear')
         # self.trh = self.df[(self.df['TeamYear']=='1947-TRH') & (self.df['is_playoffs']==0)]
         # self.trh = self.trh[['game_result']]
         # self.trh = self.trh.head(20)
         # self.trh = self.trh.rename(columns={'game_result':'1947-TRH'})
         # self.trh = self.trh.T
+        # self.trh.columns = self.datacolumns
+        # self.teamlabels.update(self.trh)
+        
+        self.teamlabels = self.teamlabels.set_index('TeamYear')
         
         for team in self.allteams:
             self.teamrecord = self.df[(self.df['TeamYear']==team) & (self.df['is_playoffs']==0)]
             self.teamrecord = self.teamrecord[['game_result']]
-            self.teamrecord = self.teamrecord.head(20)
+            self.teamrecord = self.teamrecord.head(10)
             self.teamrecord = self.teamrecord.rename(columns={'game_result': team})
             self.teamrecord = self.teamrecord.T
-            self.database = pd.concat([self.teamlabels, self.teamrecord], axis=1, sort=False)
+            self.teamrecord.columns = self.datacolumns
+            self.teamlabels.update(self.teamrecord)
             lst = [self.teamrecord]
             del lst
             
