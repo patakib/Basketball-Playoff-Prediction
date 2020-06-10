@@ -61,10 +61,11 @@ class Data:
             self.teamlabels.update(self.teamrecord)
             lst = [self.teamrecord]
             del lst
-           
+          
         self.y = self.teamlabels[['Playoff']]
         self.teamlabels = self.teamlabels.drop(['Playoff'], axis=1)
         self.X = self.teamlabels.copy()
+        self.X = pd.get_dummies(self.X)
 
     def overview(self, rows):
         return self.df.head(rows)
