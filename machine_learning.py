@@ -6,7 +6,7 @@ Created on Mon Jun  8 08:47:14 2020
 """
 
 import pandas as pd
-from data import RawData
+from data import Data
 
-sample = RawData()
-print(sample.overview(20))
+class MyClassification(Data):
+    

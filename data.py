@@ -49,15 +49,6 @@ class Data:
             self.teamlabels[column] = np.nan
         
         
-        # self.teamlabels = self.teamlabels.set_index('TeamYear')
-        # self.trh = self.df[(self.df['TeamYear']=='1947-TRH') & (self.df['is_playoffs']==0)]
-        # self.trh = self.trh[['game_result']]
-        # self.trh = self.trh.head(20)
-        # self.trh = self.trh.rename(columns={'game_result':'1947-TRH'})
-        # self.trh = self.trh.T
-        # self.trh.columns = self.datacolumns
-        # self.teamlabels.update(self.trh)
-        
         self.teamlabels = self.teamlabels.set_index('TeamYear')
         
         for team in self.allteams:
@@ -70,8 +61,10 @@ class Data:
             self.teamlabels.update(self.teamrecord)
             lst = [self.teamrecord]
             del lst
-            
-        
+           
+        self.y = self.teamlabels[['Playoff']]
+        self.teamlabels = self.teamlabels.drop(['Playoff'], axis=1)
+        self.X = self.teamlabels.copy()
 
     def overview(self, rows):
         return self.df.head(rows)
