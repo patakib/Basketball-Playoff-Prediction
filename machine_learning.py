@@ -100,6 +100,17 @@ class Test(Data):
     
     
     
+class Predict(Data):
+      
+    def predict(self):
+        self.X_train, self.X_test, self.y_train, self.y_test = train_test_split(self.X, self.y, test_size=0.2, random_state=42)
+        self.log_clf = LogisticRegression(solver="lbfgs", random_state=42)
+        self.log_clf.fit(self.X_train, self.y_train.values.ravel())
+        self.y_predict = self.log_clf.predict(self.X_values)
+        return self.y_predict
+        
+        
+        
     
     
     
