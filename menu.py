@@ -20,9 +20,11 @@ from sklearn.tree import DecisionTreeClassifier
 from sklearn.svm import SVC, LinearSVC
 from sklearn.neighbors import KNeighborsClassifier
 
+x = 1
 
 class Menu:
     """Display menu and respond to choices"""
+
     
     def __init__(self):
         self.data = Data()
@@ -55,6 +57,8 @@ class Menu:
                 
     def prediction(self):
         
+    
+        
         self.X_valueslist=['M1_W', 'M1_L', 'M2_W', 'M2_L', 'M3_W', 'M3_L', 'M4_W', 'M4_L', 'M5_W', 'M5_L', 'M6_W', 'M6_L', 'M7_W', 'M7_L', 'M8_W', 'M8_L', 'M9_W', 'M9_L', 'M10_W', 'M10_L']
         self.lst = [0,1,2,3,4,5,6,7,8,9]
         self.results=[]
@@ -77,7 +81,10 @@ class Menu:
         self.log_clf = LogisticRegression(solver="lbfgs", random_state=42)
         self.log_clf.fit(self.test.X_train, self.test.y_train.values.ravel())
         self.y_predict = self.log_clf.predict(self.X_values)
+        print("Our prediction: ")
         print(self.y_predict)
+        
+        
         
     def quit(self):
         print("Thank you for using NBA Prediction!")
