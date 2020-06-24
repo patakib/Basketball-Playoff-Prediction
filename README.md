@@ -1,7 +1,7 @@
 # Basketball-Playoff-Prediction
 
 ## Aim of this program
-The program uses the NBA dataset from Kaggle, asks for a team's first 10 results and predicts whether the team participate in the playoff or not.
+The program uses the NBA dataset from Kaggle (https://www.kaggle.com/fivethirtyeight/fivethirtyeight-nba-elo-dataset?select=nbaallelo.csv), asks for a team's first 10 results and predicts whether the team participate in the playoff or not.
 
 ## Structure and operation
 The program contains three different files (modules).
